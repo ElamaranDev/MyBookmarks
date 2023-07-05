@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+:root {
+  --logo: #8473ee;
+  --heading: #0b1251;
+  --search-bar: #f1f3f4;
+  --font-normal: 1rem;
+  --font-medium: 1.25rem;
+  --font-medium-large: 1.5rem;
+  --font-large: 2rem;
+}
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+nav {
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
+  height: 60px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  z-index: 99999;
+}
+.nav-header {
+  font-size: var(--font-medium-large);
+  width: 200px;
+}
+.nav-header span {
+  cursor: auto;
+}
+.nav-header .bookmarks {
+  color: var(--logo);
+}
+.nav-search {
+  display: flex;
+  flex: 1;
+  margin: 0 auto;
+  justify-content: center;
+}
+.nav-search-bar {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  background: var(--search-bar);
+  padding-left: 15px;
+  flex: 1;
+  border-radius: 25px;
+  max-width: 500px;
+}
+.nav-search-bar img {
+  height: 15px;
+  margin-right: 5px;
+}
+.nav-search-bar input {
+  border: none;
+  background-color: transparent;
+  height: 100%;
+  text-indent: 5px;
+  flex: 1;
+  outline: none;
+}
+.nav-options {
+  width: 200px;
+  display: flex;
+  justify-content: flex-end;
+}
+.nav-options img {
+  height: 18px;
+  cursor: pointer;
+}
+
+/* main component */
+ 
+main{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 80px;
+}
+
+.bookmarks-container{
+    height: auto;
+    flex: 1;
+    max-width: 700px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.bookmark{
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+.bookmark #web-favicon{
+    margin-right: 5px;
+}
+.bookmark-info{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+.bookmark #web-favicon{
+    height: 20px;
+    margin-right: 20px;
+}
+.bookmark-name{
+    margin-right: 30px;
+}
+.options-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 6px;
+    border-radius: 50%;
+}
+.options-btn:hover{
+    background-color: rgb(244, 244, 244);
+}
+.options-btn:active{
+    opacity: 0.5;
+}
+.options-btn #options-btn{
+    height: 18px;
+    cursor: pointer;
+}
+
+/* popup  */
+
+.popup-container{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 450px;
+    height: 285px;
+}
+.popup-container .name-area, .url-area{
+  display: flex;
+  flex-direction: column;
+}
+.popup-container h3{
+  margin-bottom: 20px;
+  color: var(--heading);
+}
+.name-area input, .url-area input{
+outline: none;
+height: 30px;
+margin-bottom: 20px;
+margin-top: 5px;
+text-indent: 10px;
+border: 1px solid rgb(199, 199, 199);
+border-radius: 5px;
+}
+.buttons{
+  margin-top: 20px;
+  display: flex;
+  justify-content: end;
+}
+.buttons .cancel-btn, .save-btn{
+  padding: 8px 16px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.buttons .save-btn{
+  color: white;
+  background-color: var(--logo);
+}
