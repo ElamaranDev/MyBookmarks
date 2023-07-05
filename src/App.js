@@ -4,36 +4,30 @@ import Main from "./components/Main";
 import Popup from "./components/Popup";
 
 const App = () => {
-  const [bookmarks, setBookmarks] = useState('');
-  const [isOpen, setIsOpen] = useState(true);
- 
-  // const getFaviconURL = async (url, index) => {
-  //   try {
-  //     const domain = extractDomainFromUrl(url);
-  //     const size = 32;
-  //     const faviconURL = `https://www.google.com/s2/favicons?domain=${domain}&sz=${size}`;
-  //     if (faviconURL) {
-  //       const updatedBookmarks = [...bookmarks];
-  //       updatedBookmarks[index].faviconURL = faviconURL;
-  //       setBookmarks(updatedBookmarks);
-  //     }
-  //   } catch (error) {
-  //     console.log("Error occurred while fetching favicon:", error);
-  //   }
-  // };
-
+  const data = JSON.parse(localStorage.getItem('bookmarks'));
+  const [bookmarks, setBookmarks] = useState(Array.isArray(data) ? data : []);
+  const [isOpen, setIsOpen] = useState(false);
+  console.log(bookmarks);
   const onClose = () => {
     if (true) {
       setIsOpen(false);
       console.log("cancel clicked");
     }
   };
+  const handleAddBookmarks = ()=>{
+    setIsOpen(true);
+  };
 
   return (
     <React.Fragment>
-      <Header />
-      <Main bookmarks={bookmarks}/>
-      <Popup isOpen={isOpen} onClose={onClose} bookmarks={bookmarks} setBookmarks={setBookmarks}/>
+      <Header handleAddBookmarks={handleAddBookmarks}/>
+      <Main bookmarks={bookmarks} />
+      <Popup
+        isOpen={isOpen}
+        onClose={onClose}
+        bookmarks={bookmarks}
+        setBookmarks={setBookmarks}
+      />
     </React.Fragment>
   );
 };

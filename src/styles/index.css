@@ -178,3 +178,7 @@ border-radius: 5px;
   color: white;
   background-color: var(--logo);
 }
+.no-bookmarks{
+  display: none;
+  color: grey;
+}

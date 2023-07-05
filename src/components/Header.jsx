@@ -2,7 +2,7 @@ import React from 'react'
 import searchIcon from '../assets/search-icon.png'
 import optionsIcon from '../assets/options-icon-black.png'
 
-const Header = () => {
+const Header = ({ handleAddBookmarks }) => {
   return (
     <nav>
         <div className="nav-header">
@@ -20,7 +20,7 @@ const Header = () => {
             </div>
         </div>
         <div className="nav-options">
-            <img src={optionsIcon} alt="options icon" />
+            <img onClick={handleAddBookmarks} src={optionsIcon} alt="options icon" />
         </div>
     </nav>
   )
