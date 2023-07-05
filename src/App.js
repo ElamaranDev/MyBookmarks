@@ -7,11 +7,9 @@ const App = () => {
   const data = JSON.parse(localStorage.getItem('bookmarks'));
   const [bookmarks, setBookmarks] = useState(Array.isArray(data) ? data : []);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(bookmarks);
   const onClose = () => {
     if (true) {
       setIsOpen(false);
-      console.log("cancel clicked");
     }
   };
   const handleAddBookmarks = ()=>{
