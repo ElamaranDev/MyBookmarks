@@ -4,7 +4,7 @@ import Main from "./components/Main";
 import Popup from "./components/Popup";
 
 const App = () => {
-  const data = JSON.parse(localStorage.getItem('bookmarks'));
+  const data = JSON.parse(localStorage.getItem("bookmarks"));
   const [bookmarks, setBookmarks] = useState(Array.isArray(data) ? data : []);
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {
@@ -12,13 +12,13 @@ const App = () => {
       setIsOpen(false);
     }
   };
-  const handleAddBookmarks = ()=>{
+  const handleAddBookmarks = () => {
     setIsOpen(true);
   };
 
   return (
     <React.Fragment>
-      <Header handleAddBookmarks={handleAddBookmarks}/>
+      <Header handleAddBookmarks={handleAddBookmarks} />
       <Main bookmarks={bookmarks} />
       <Popup
         isOpen={isOpen}

@@ -33,7 +33,7 @@ const Popup = ({ isOpen, onClose, bookmarks, setBookmarks }) => {
     const faviconURL = `https://www.google.com/s2/favicons?domain=${domain}&sz=${size}`;
     const newBookmark = {
       name: name,
-      url: url,
+      url: addHttpToUrl(url),
       id: bookmarks.length + 1,
       faviconURL: faviconURL,
     };
@@ -46,7 +46,12 @@ const Popup = ({ isOpen, onClose, bookmarks, setBookmarks }) => {
     urlRef.current.value = "";
     return isValid;
   };
-
+  function addHttpToUrl(url) {
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      url = "http://" + url;
+    }
+    return url;
+  }
   if (!isOpen) return null;
   return (
     <>

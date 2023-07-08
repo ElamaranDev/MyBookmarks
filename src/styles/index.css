@@ -9,6 +9,8 @@
   --font-medium: 1.25rem;
   --font-medium-large: 1.5rem;
   --font-large: 2rem;
+  --bookmark-clicked-transition: height 0.2s linear;
+  --visit-hover: rgb(247, 247, 247);
 }
 
 *,
@@ -25,15 +27,19 @@ header {
   height: 60px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
   z-index: 99999;
+  justify-content: center;
+  display: flex;
 }
 nav {
   display: flex;
+  flex: 1;
   align-items: center;
-  max-width: 1800px;
+  max-width: 1600px;
 }
 .nav-header {
   font-size: var(--font-medium-large);
   width: 200px;
+  justify-content: flex-start;
 }
 .mobile-logo {
   display: none;
@@ -89,22 +95,45 @@ main {
   justify-content: center;
   margin: 0 auto;
   margin-top: 100px;
+  transition: var(--bookmark-clicked-transition);
 }
 
 .bookmarks-container {
   height: auto;
   flex: 1;
   max-width: 700px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  margin-right: 40px;
-  margin-left: 40px;
+  margin-right: 20px;
+  margin-left: 20px;
+  transition: var(--bookmark-clicked-transition);
+  flex-wrap: wrap;
+}
+.bookmark-item {
+  margin: 1px;
+  height: 80px;
+  transition: var(--bookmark-clicked-transition);
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0px 10px;
+  position: relative;
+  width: 100%;
+  flex: 1;
+  flex-basis: 100%;
+}
+.bookmark-item:last-child {
+  border-radius: 0 0 5px 5px;
+}
+.bookmark-item:first-child {
+  border-radius: 5px 5px 0px 0px;
 }
 .bookmark {
   display: flex;
   align-items: center;
   height: 40px;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
 .bookmark #web-favicon {
   margin-right: 5px;
@@ -113,19 +142,54 @@ main {
   display: flex;
   flex: 1;
   flex-direction: row;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  position: relative;
 }
-.bookmark-info .url-name{
-  overflow: hidden;
-}
+
 .bookmark #web-favicon {
   height: 20px;
   margin-right: 20px;
 }
 .bookmark-name {
   margin-right: 30px;
+}
+.bookmark-clicked {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.bookmark-clicked .url-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--logo);
+  width: auto;
+}
+
+.bookmark-clicked .visit-btn {
+  display: flex;
+  align-items: center;
+}
+.bookmark-clicked .visit-btn a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  height: 30px;
+  width: 70px;
+  border-radius: 5px;
+}
+.bookmark-clicked .visit-btn a:hover {
+  background-color: var(--visit-hover);
+}
+.bookmark-clicked .visit-btn a:active {
+  background-color: rgb(247, 247, 247);
+}
+.bookmark-clicked #visit-icon {
+  height: 14px;
+  margin-right: 7px;
 }
 .options-btn {
   display: flex;
@@ -144,7 +208,10 @@ main {
   height: 18px;
   cursor: pointer;
 }
-
+.bookmark-item-clicked {
+  height: 40px;
+  transition: var(--bookmark-clicked-transition);
+}
 /* popup  */
 
 .popup-container {
@@ -204,19 +271,74 @@ main {
   margin-top: 80px;
 }
 
-/* mobile view */
+/* options toggle  */
+.options {
+  display: flex;
+  justify-content: center;
+  background-color: var(--search-bar);
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.list-items {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  width: 150px;
+}
+.list-item {
+  display: flex;
+  justify-content: center;
+}
+.list-items li a {
+  display: flex;
+  text-decoration: none;
+  width: 100%;
+  background-color: var(--search-bar);
+  justify-content: center;
+  height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.list-items li a:hover {
+  background-color: rgb(239, 239, 239);
+}
 
-@media screen and (max-width: 575px) {
+/* bookmark options */
+
+/* .bookmark-item-options{
+  display: flex;
+  justify-content: center;
+  background-color: var(--search-bar);
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  z-index: 99999;
+  overflow: visible;
+} */
+
+/* mobile view */
+@media screen and (max-width: 757px) {
+  .bookmarks-container {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 675px) {
   .nav-header {
     display: none;
   }
   .mobile-logo {
     display: flex;
-    width: unset;
+    width: 100px;
     margin-right: 40px;
   }
   .nav-options {
-    width: unset;
+    width: 100px;
     margin-left: 40px;
   }
   .nav-search {
@@ -243,38 +365,24 @@ main {
   .popup-container label {
     font-size: var(--font-normal);
   }
+  .list-items li a {
+    height: 40px;
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+  .list-items {
+    width: 130px;
+  }
+  .popup-container {
+    top: 30%;
+    left: 50%;
+  }
 }
-
-/* options toggle  */
-.options {
-  display: flex;
-  justify-content: center;
-  background-color: var(--search-bar);
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  border-radius: 5px;
-}
-.list-items {
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  width: 150px;
-}
-.list-item {
-  display: flex;
-  justify-content: center;
-}
-.list-items li a {
-  display: flex;
-  text-decoration: none;
-  width: 100%;
-  background-color: var(--search-bar);
-  justify-content: center;
-  height: 40px;
-  padding: 10px;
-  border-radius: 5px;
-}
-.list-items li a:hover {
-  background-color: rgb(239, 239, 239);
+@media screen and (max-width: 575px) {
+  .nav-header{
+    width: unset;
+  }
+  .nav-options{
+    width: unset;
+  }
 }
