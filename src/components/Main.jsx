@@ -12,7 +12,6 @@ const Main = ({
 }) => {
   const containerRef = useRef(null);
   const noBookmarks = useRef(null);
-  const bookmarkItemRef = useRef(null);
   const optionsRef = useRef(null);
   const [expandedBookmarkId, setExpandedBookmarkId] = useState(null);
   const [bookmarkOptionId, setBookmarkOptionId] = useState(null);
@@ -42,7 +41,7 @@ const Main = ({
   }, [bookmarks]);
 
   const handleBookmarkClick = (id, event) => {
-    if (event.target.id !== "options-btn") {
+    if (!event.target.closest(".options-btn")) {
       if (expandedBookmarkId === id) {
         setExpandedBookmarkId(null);
       } else {
@@ -50,8 +49,9 @@ const Main = ({
       }
     }
   };
+
   const handleOptionsBtn = (id, event) => {
-    if (bookmarkOptionId === event.target.id) {
+    if (bookmarkOptionId === id) {
       setBookmarkOptionId(null);
     } else {
       setBookmarkOptionId(id);
@@ -85,8 +85,6 @@ const Main = ({
               ) : null}
               <div
                 style={{ background: isExpanded ? "#f1f3f4" : "" }}
-                ref={bookmarkItemRef}
-                key={id}
                 className={`bookmark-item ${
                   !isExpanded ? "bookmark-item-clicked" : ""
                 }`}
