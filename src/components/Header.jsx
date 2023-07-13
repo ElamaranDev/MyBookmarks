@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import searchIcon from "../assets/search-icon.png";
 import optionsIcon from "../assets/options-icon-black.png";
 
-const Header = ({ handleAddBookmarks }) => {
+const Header = ({ handleClearBookmarks, handleAddBookmarks }) => {
   const optionsRef = useRef(null);
   const [isOptions, setIsOptions] = useState(false);
   const handleOptionsOpen = () => {
@@ -12,6 +12,7 @@ const Header = ({ handleAddBookmarks }) => {
   const handleOptionsClose = () => {
     setIsOptions(false);
   };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (optionsRef.current && !optionsRef.current.contains(event.target)) {
@@ -25,6 +26,7 @@ const Header = ({ handleAddBookmarks }) => {
       window.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   return (
     <header>
       <nav>
@@ -58,7 +60,14 @@ const Header = ({ handleAddBookmarks }) => {
         <div ref={optionsRef} className="options js-options">
           <ul className="list-items">
             <li className="list-item">
-              <a href="#">Sort by name</a>
+              <a
+                onClick={() => {
+                  handleOptionsClose();
+                }}
+                href="#"
+              >
+                Sort by name
+              </a>
             </li>
             <li className="list-item">
               <a
@@ -72,7 +81,15 @@ const Header = ({ handleAddBookmarks }) => {
               </a>
             </li>
             <li className="list-item">
-              <a href="#">Clear Bookmarks</a>
+              <a
+                onClick={() => {
+                  handleClearBookmarks();
+                  handleOptionsClose();
+                }}
+                href="#"
+              >
+                Clear Bookmarks
+              </a>
             </li>
           </ul>
         </div>

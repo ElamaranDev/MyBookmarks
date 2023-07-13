@@ -4,11 +4,32 @@ import OptionsBtn from "../assets/options-icon-grey.png";
 import faviconAlt from "../assets/favicon-alt.png";
 import visitIcon from "../assets/visit-blue.png";
 
-const Main = ({ bookmarks }) => {
+const Main = ({
+  isOptions,
+  handleOptionsClose,
+  handleOptionsOpen,
+  bookmarks,
+}) => {
   const containerRef = useRef(null);
   const noBookmarks = useRef(null);
   const bookmarkItemRef = useRef(null);
+  const optionsRef = useRef(null);
   const [expandedBookmarkId, setExpandedBookmarkId] = useState(null);
+  const [bookmarkOptionId, setBookmarkOptionId] = useState(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+        handleOptionsClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleOptionsClose]);
 
   useEffect(() => {
     if (!bookmarks || bookmarks.length === 0) {
@@ -19,6 +40,7 @@ const Main = ({ bookmarks }) => {
       noBookmarks.current.style.display = "none";
     }
   }, [bookmarks]);
+
   const handleBookmarkClick = (id, event) => {
     if (event.target.id !== "options-btn") {
       if (expandedBookmarkId === id) {
@@ -28,15 +50,39 @@ const Main = ({ bookmarks }) => {
       }
     }
   };
+  const handleOptionsBtn = (id, event) => {
+    if (bookmarkOptionId === event.target.id) {
+      setBookmarkOptionId(null);
+    } else {
+      setBookmarkOptionId(id);
+    }
+  };
+
   return (
     <main>
       <div ref={containerRef} className="bookmarks-container">
         {bookmarks.map((bookmark) => {
           const { name, url, id, faviconURL } = bookmark;
           const isExpanded = expandedBookmarkId === id;
+          const isOptionsOpen = bookmarkOptionId === id;
 
           return (
-            <>
+            <div key={id} className="bookmark-container">
+              {isOptionsOpen && isOptions ? (
+                <div className="bookmark-item-options">
+                  <ul className="list-items">
+                    <li className="list-item">
+                      <a href="#">Copy</a>
+                    </li>
+                    <li className="list-item">
+                      <a href="#">Edit</a>
+                    </li>
+                    <li className="list-item">
+                      <a href="#">Delete</a>
+                    </li>
+                  </ul>
+                </div>
+              ) : null}
               <div
                 style={{ background: isExpanded ? "#f1f3f4" : "" }}
                 ref={bookmarkItemRef}
@@ -63,7 +109,14 @@ const Main = ({ bookmarks }) => {
                       {name}
                     </span>
                   </div>
-                  <div className="options-btn">
+                  <div
+                    ref={optionsRef}
+                    onClick={(event) => {
+                      handleOptionsOpen();
+                      handleOptionsBtn(id, event);
+                    }}
+                    className="options-btn"
+                  >
                     <img
                       id="options-btn"
                       src={OptionsBtn}
@@ -80,21 +133,8 @@ const Main = ({ bookmarks }) => {
                     </a>
                   </div>
                 </div>
-                <div className="bookmark-item-options">
-                  <ul className="list-items">
-                    <li className="list-item">
-                      <a href="#">Copy</a>
-                    </li>
-                    <li className="list-item">
-                      <a href="#">Edit</a>
-                    </li>
-                    <li className="list-item">
-                      <a href="#">Delete</a>
-                    </li>
-                  </ul>
-                </div>
               </div>
-            </>
+            </div>
           );
         })}
       </div>
