@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/MyBookmarks/static/css/main.8fcbefde.css",
+    "main.js": "/MyBookmarks/static/js/main.e1ab646d.js",
+    "static/media/search-icon.png": "/MyBookmarks/static/media/search-icon.1b63d5a1ddfe853bb4b3.png",
+    "static/media/favicon-alt.png": "/MyBookmarks/static/media/favicon-alt.c36713f9c0ad3bdfaff8.png",
+    "static/media/visit-blue.png": "/MyBookmarks/static/media/visit-blue.b357fc6727c65568fd3c.png",
+    "index.html": "/MyBookmarks/index.html",
+    "main.8fcbefde.css.map": "/MyBookmarks/static/css/main.8fcbefde.css.map",
+    "main.e1ab646d.js.map": "/MyBookmarks/static/js/main.e1ab646d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8fcbefde.css",
+    "static/js/main.e1ab646d.js"
+  ]
+}
