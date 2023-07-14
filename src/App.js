@@ -9,16 +9,13 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOptions, setIsOptions] = useState(false);
 
-  const handleOptionsOpen = () => {
+  const handleOptionsOpen = (id) => {
     setIsOptions(true);
   };
-  console.log(`state of isOptions is ${isOptions}`);
 
   const handleOptionsClose = () => {
     setIsOptions(false);
   };
-
-  console.log(`state of isOptions is ${isOptions}`);
 
   const onClose = () => {
     setIsOpen(false);
@@ -32,6 +29,12 @@ const App = () => {
     setBookmarks([]);
   };
 
+  const handleBookmarkDelete = (id) => {
+    const newBookmarks = bookmarks.filter((bookmark) => bookmark.id !== id);
+    setBookmarks(newBookmarks);
+    localStorage.setItem("bookmarks", JSON.stringify(newBookmarks));
+  };
+
   return (
     <React.Fragment>
       <Header
@@ -39,6 +42,7 @@ const App = () => {
         handleAddBookmarks={handleAddBookmarks}
       />
       <Main
+        handleBookmarkDelete={handleBookmarkDelete}
         isOptions={isOptions}
         handleOptionsClose={handleOptionsClose}
         handleOptionsOpen={handleOptionsOpen}

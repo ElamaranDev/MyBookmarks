@@ -8,6 +8,7 @@ const Main = ({
   isOptions,
   handleOptionsClose,
   handleOptionsOpen,
+  handleBookmarkDelete,
   bookmarks,
 }) => {
   const containerRef = useRef(null);
@@ -18,7 +19,11 @@ const Main = ({
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+      if (
+        optionsRef.current &&
+        !optionsRef.current.contains(event.target) &&
+        !event.target.classList.contains("bookmark-item-options")
+      ) {
         handleOptionsClose();
       }
     };
@@ -51,11 +56,15 @@ const Main = ({
   };
 
   const handleOptionsBtn = (id, event) => {
-    if (bookmarkOptionId === id) {
+    if (bookmarkOptionId === event.target.id) {
       setBookmarkOptionId(null);
     } else {
       setBookmarkOptionId(id);
     }
+  };
+
+  const handleOptionsClick = (event) => {
+    event.stopPropagation();
   };
 
   return (
@@ -69,7 +78,11 @@ const Main = ({
           return (
             <div key={id} className="bookmark-container">
               {isOptionsOpen && isOptions ? (
-                <div className="bookmark-item-options">
+                <div
+                  className="bookmark-item-options"
+                  ref={optionsRef}
+                  onClick={handleOptionsClick}
+                >
                   <ul className="list-items">
                     <li className="list-item">
                       <a href="#">Copy</a>
@@ -78,7 +91,14 @@ const Main = ({
                       <a href="#">Edit</a>
                     </li>
                     <li className="list-item">
-                      <a href="#">Delete</a>
+                      <a
+                        onClick={() => {
+                          handleBookmarkDelete(id);
+                        }}
+                        href="#"
+                      >
+                        Delete
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -108,9 +128,8 @@ const Main = ({
                     </span>
                   </div>
                   <div
-                    ref={optionsRef}
                     onClick={(event) => {
-                      handleOptionsOpen();
+                      handleOptionsOpen(id);
                       handleOptionsBtn(id, event);
                     }}
                     className="options-btn"

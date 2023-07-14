@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const Popup = ({ isOpen, onClose, bookmarks, setBookmarks }) => {
   const nameRef = useRef(null);
@@ -34,7 +35,7 @@ const Popup = ({ isOpen, onClose, bookmarks, setBookmarks }) => {
     const newBookmark = {
       name: name,
       url: addHttpToUrl(url),
-      id: bookmarks.length + 1,
+      id: uuidv4(),
       faviconURL: faviconURL,
     };
     setBookmarks([...bookmarks, newBookmark]);
