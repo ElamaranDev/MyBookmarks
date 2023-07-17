@@ -21,6 +21,12 @@
   box-sizing: border-box;
   font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+body{
+  height: 100vh;
+}
+
+
 header {
   padding: 10px 20px;
   align-items: center;
@@ -232,6 +238,21 @@ bookmark {
   position: absolute;
   right: 0;
 }
+/* blur effect when popup container is open */
+
+.popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100Vh;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(128, 128, 128, 0.619);
+}
+
+
 /* popup  */
 
 .popup-container {
@@ -248,7 +269,7 @@ bookmark {
   flex: 1;
   height: 285px;
   min-width: 500px;
-  z-index: 99999999;
+  z-index: 99999999999;
 }
 .popup-container .name-area,
 .url-area {
@@ -334,7 +355,7 @@ bookmark {
   }
 }
 
-@media screen and (max-width: 675px) {
+@media screen and (max-width: 775px) {
   .nav-header {
     display: none;
   }
@@ -361,7 +382,7 @@ bookmark {
     text-overflow: ellipsis;
   }
   .popup-container {
-    min-width: 280px;
+    min-width: 380px;
   }
   .popup-container h3 {
     margin-bottom: 20px;
@@ -379,10 +400,6 @@ bookmark {
   .list-items {
     width: 130px;
   }
-  .popup-container {
-    top: 30%;
-    left: 50%;
-  }
 }
 @media screen and (max-width: 575px) {
   .nav-header {
@@ -390,5 +407,8 @@ bookmark {
   }
   .nav-options {
     width: unset;
+  }
+  .popup-container {
+    min-width: 280px;
   }
 }

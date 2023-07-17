@@ -56,34 +56,36 @@ const Popup = ({ isOpen, onClose, bookmarks, setBookmarks }) => {
   if (!isOpen) return null;
   return (
     <>
-      <form className="popup-container">
-        <h3>Add Bookmark</h3>
-        <div className="name-area">
-          <label htmlFor="bookmark-name">Name</label>
-          <input id="bookmark-name" type="text" ref={nameRef} required />
-        </div>
-        <div className="url-area">
-          <label htmlFor="bookmark-url">URL</label>
-          <input id="bookmark-url" type="text" ref={urlRef} required />
-        </div>
-        <div className="buttons">
-          <button onClick={onClose} type="button" className="cancel-btn">
-            Cancel
-          </button>
-          <button
-            onClick={(event) => {
-              if (handleSubmit(event)) {
-                onClose();
-              }
-              handleSubmit(event);
-            }}
-            type="submit"
-            className="save-btn"
-          >
-            Save
-          </button>
-        </div>
-      </form>
+      <div className="popup-overlay">
+        <form className="popup-container">
+          <h3>Add Bookmark</h3>
+          <div className="name-area">
+            <label htmlFor="bookmark-name">Name</label>
+            <input id="bookmark-name" type="text" ref={nameRef} required />
+          </div>
+          <div className="url-area">
+            <label htmlFor="bookmark-url">URL</label>
+            <input id="bookmark-url" type="text" ref={urlRef} required />
+          </div>
+          <div className="buttons">
+            <button onClick={onClose} type="button" className="cancel-btn">
+              Cancel
+            </button>
+            <button
+              onClick={(event) => {
+                if (handleSubmit(event)) {
+                  onClose();
+                }
+                handleSubmit(event);
+              }}
+              type="submit"
+              className="save-btn"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };

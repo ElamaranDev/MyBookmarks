@@ -67,6 +67,13 @@ const Main = ({
     event.stopPropagation();
   };
 
+  const handleCopy = (url) => {
+    navigator.clipboard
+      .writeText(url)
+      .then(() => alert("URL copied to clipboard"))
+      .catch((error) => console.error("Unable to copy URL: ", error));
+  };
+
   return (
     <main>
       <div ref={containerRef} className="bookmarks-container">
@@ -85,7 +92,14 @@ const Main = ({
                 >
                   <ul className="list-items">
                     <li className="list-item">
-                      <a href="#">Copy</a>
+                      <a
+                        onClick={() => {
+                          handleCopy(url);
+                        }}
+                        href="#"
+                      >
+                        Copy
+                      </a>
                     </li>
                     <li className="list-item">
                       <a href="#">Edit</a>
