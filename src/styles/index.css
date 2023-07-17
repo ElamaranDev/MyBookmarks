@@ -177,11 +177,13 @@ bookmark {
   white-space: nowrap;
   color: var(--logo);
   width: auto;
+  margin-bottom: 10px;
 }
 
 .bookmark-clicked .visit-btn {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
 .bookmark-clicked .visit-btn a {
   text-decoration: none;
@@ -194,7 +196,8 @@ bookmark {
   border-radius: 5px;
 }
 .bookmark-clicked .visit-btn a:hover {
-  background-color: var(--visit-hover);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 .bookmark-clicked .visit-btn a:active {
   background-color: rgb(247, 247, 247);
