@@ -22,10 +22,9 @@
   font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body{
+body {
   height: 100vh;
 }
-
 
 header {
   padding: 10px 20px;
@@ -246,12 +245,11 @@ bookmark {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 100Vh;
+  height: 100vh;
   width: 100%;
   z-index: 1;
   background-color: rgba(128, 128, 128, 0.619);
 }
-
 
 /* popup  */
 
@@ -348,6 +346,34 @@ bookmark {
   background-color: rgb(239, 239, 239);
 }
 
+/* Toast message */
+
+.toast-container {
+  background-color: rgb(206, 206, 255);
+  color: black;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  transform: translateX(-500px);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+.toast-container.show {
+  transform: translateX(0px);
+}
+.toast-message {
+  height: 100%;
+  background-color: var(--search-bar);
+  padding: 10px;
+  border-radius: 5px 5px 0 0;
+}
+.progress-bar {
+  height: 4px;
+  border-radius: 0 0 5px 5px;
+  transition: width 0.1s linear;
+  background-color: var(--logo);
+}
+
 /* mobile view */
 @media screen and (max-width: 757px) {
   .bookmarks-container {
@@ -410,5 +436,6 @@ bookmark {
   }
   .popup-container {
     min-width: 280px;
+    top: 40%;
   }
 }

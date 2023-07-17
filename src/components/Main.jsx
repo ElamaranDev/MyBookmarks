@@ -5,6 +5,7 @@ import faviconAlt from "../assets/favicon-alt.png";
 import visitIcon from "../assets/visit-blue.png";
 
 const Main = ({
+  handleToastMessage,
   isOptions,
   handleOptionsClose,
   handleOptionsOpen,
@@ -70,7 +71,6 @@ const Main = ({
   const handleCopy = (url) => {
     navigator.clipboard
       .writeText(url)
-      .then(() => alert("URL copied to clipboard"))
       .catch((error) => console.error("Unable to copy URL: ", error));
   };
 
@@ -95,6 +95,8 @@ const Main = ({
                       <a
                         onClick={() => {
                           handleCopy(url);
+                          handleToastMessage(`"${name}" Copied to Clip board!`);
+                          handleOptionsClose();
                         }}
                         href="#"
                       >
@@ -108,6 +110,7 @@ const Main = ({
                       <a
                         onClick={() => {
                           handleBookmarkDelete(id);
+                          handleToastMessage(`"${name}" deleted!`);
                         }}
                         href="#"
                       >

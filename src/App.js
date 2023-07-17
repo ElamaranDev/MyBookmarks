@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Popup from "./components/Popup";
+import Toast from "./components/Toast";
 
 const App = () => {
   const data = JSON.parse(localStorage.getItem("bookmarks"));
@@ -35,6 +36,15 @@ const App = () => {
     localStorage.setItem("bookmarks", JSON.stringify(newBookmarks));
   };
 
+
+// toast message function
+
+  const toastRef = useRef();
+
+  const handleToastMessage = (msg) => {
+    toastRef.current.showToast(msg);
+  };
+
   return (
     <React.Fragment>
       <Header
@@ -42,6 +52,7 @@ const App = () => {
         handleAddBookmarks={handleAddBookmarks}
       />
       <Main
+        handleToastMessage={handleToastMessage}
         handleBookmarkDelete={handleBookmarkDelete}
         isOptions={isOptions}
         handleOptionsClose={handleOptionsClose}
@@ -54,6 +65,7 @@ const App = () => {
         bookmarks={bookmarks}
         setBookmarks={setBookmarks}
       />
+      <Toast ref={toastRef} timeout={3000} />
     </React.Fragment>
   );
 };
