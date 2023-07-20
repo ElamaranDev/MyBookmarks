@@ -238,7 +238,8 @@ bookmark {
   z-index: 99999999;
   overflow: visible;
   position: absolute;
-  right: 0;
+  right: 10px;
+  top: 10px;
 }
 /* blur effect when popup container is open */
 
@@ -365,10 +366,16 @@ bookmark {
   transform: translateX(0px);
 }
 .toast-message {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
   height: 100%;
   background-color: var(--search-bar);
   padding: 10px;
   border-radius: 5px 5px 0 0;
+}
+.toast-message a {
+  text-decoration: none;
 }
 .progress-bar {
   height: 4px;

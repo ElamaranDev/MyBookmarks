@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {
   useState,
   useImperativeHandle,
@@ -6,11 +7,12 @@ import React, {
   useRef,
 } from "react";
 
-const Toast = ({ timeout }, ref) => {
+const Toast = ({ timeout, handleBookmarkUndo }, ref) => {
   const [show, setShow] = useState(false);
   const [progressWidth, setProgressWidth] = useState("100%");
   const [toastMessage, setToastMessage] = useState("Toast Message");
   const progressBarAnimationRef = useRef(null);
+  const [isDeleteToast, setIsDeleteToast] = useState(false);
 
   useEffect(() => {
     if (show) {
@@ -35,9 +37,11 @@ const Toast = ({ timeout }, ref) => {
   }, [show, timeout]);
 
   useImperativeHandle(ref, () => ({
-    showToast(msg = "") {
+    showToast(msg = "", isDelete) {
       setShow(true);
       setToastMessage(msg);
+
+      setIsDeleteToast(isDelete);
 
       setTimeout(() => {
         setShow(false);
@@ -47,7 +51,21 @@ const Toast = ({ timeout }, ref) => {
 
   return (
     <div className={`toast-container ${show ? "show" : ""}`}>
-      <p className="toast-message">{toastMessage}</p>
+      <p className="toast-message">
+        {toastMessage}
+        {isDeleteToast ? (
+          <a
+            onClick={() => {
+              handleBookmarkUndo();
+              setShow(false);
+            }}
+            className="undo-button"
+            href="#"
+          >
+            Undo
+          </a>
+        ) : null}
+      </p>
       <div className="progress-bar" style={{ width: progressWidth }}></div>
     </div>
   );

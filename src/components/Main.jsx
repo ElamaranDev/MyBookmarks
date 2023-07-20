@@ -11,7 +11,6 @@ const Main = ({
   handleOptionsOpen,
   handleBookmarkDelete,
   bookmarks,
-  handleBookmarkUndo,
 }) => {
   const containerRef = useRef(null);
   const noBookmarks = useRef(null);
@@ -96,7 +95,7 @@ const Main = ({
                       <a
                         onClick={() => {
                           handleCopy(url);
-                          handleToastMessage(`"${name}" Copied to Clip board!`);
+                          handleToastMessage(`"${name}" Copied to Clip board!`, false);
                           handleOptionsClose();
                         }}
                         href="#"
@@ -111,7 +110,7 @@ const Main = ({
                       <a
                         onClick={() => {
                           handleBookmarkDelete(id);
-                          handleToastMessage(`"${name}" deleted!`);
+                          handleToastMessage(`"${name}" deleted!`, true);
                           handleOptionsClose();
                         }}
                         href="#"

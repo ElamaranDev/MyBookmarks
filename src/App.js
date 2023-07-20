@@ -12,8 +12,7 @@ const App = () => {
   const [inputValue, setInputValue] = useState("");
   const [filteredBookmarks, setFilteredBookmarks] = useState([]);
   const [sortOrder, setSortOrder] = useState("unsorted");
-  const [deletedBookmarks, setDeletedBookmarks] = useState([]);
-
+  const [lastDeletedBookmark, setLastDeletedBookmark] = useState(null);
   const getInputValue = (value) => {
     setInputValue(value);
   };
@@ -39,24 +38,29 @@ const App = () => {
   };
 
   const handleBookmarkDelete = (id) => {
-    const deletedBookmarkItem = bookmarks.filter(
+    const deletedBookmarkItem = bookmarks.find(
       (bookmark) => bookmark.id === id
     );
-    setDeletedBookmarks(deletedBookmarkItem);
+    const index = bookmarks.findIndex((bookmark) => bookmark.id === id);
+
+    setLastDeletedBookmark({ ...deletedBookmarkItem, index }); // Set the last deleted bookmark
+
     const newBookmarks = bookmarks.filter((bookmark) => bookmark.id !== id);
     setBookmarks(newBookmarks);
     localStorage.setItem("bookmarks", JSON.stringify(newBookmarks));
   };
 
   const handleBookmarkUndo = () => {
-    localStorage.setItem(
-      "bookmarks",
-      JSON.stringify([...bookmarks, ...deletedBookmarks])
-    );
-
-    setBookmarks((prevBookmarks) => [...prevBookmarks, ...deletedBookmarks]);
-
-    setDeletedBookmarks([]);
+    if (lastDeletedBookmark) {
+      const combinedBookmarks = [...bookmarks];
+      combinedBookmarks.splice(
+        lastDeletedBookmark.index,
+        0,
+        lastDeletedBookmark
+      );
+      setBookmarks(combinedBookmarks);
+      setLastDeletedBookmark(null); // Reset the lastDeletedBookmark state after undo
+    }
   };
 
   // sorting functionality
@@ -77,8 +81,8 @@ const App = () => {
 
   const toastRef = useRef();
 
-  const handleToastMessage = (msg) => {
-    toastRef.current.showToast(msg);
+  const handleToastMessage = (msg, isDelete) => {
+    toastRef.current.showToast(msg, isDelete);
   };
 
   // search functionality
@@ -108,7 +112,6 @@ const App = () => {
         handleOptionsClose={handleOptionsClose}
         handleOptionsOpen={handleOptionsOpen}
         bookmarks={filteredBookmarks}
-        handleBookmarkUndo={handleBookmarkUndo}
       />
       <Popup
         isOpen={isOpen}
@@ -116,7 +119,11 @@ const App = () => {
         bookmarks={bookmarks}
         setBookmarks={setBookmarks}
       />
-      <Toast ref={toastRef} timeout={3000} />
+      <Toast
+        handleBookmarkUndo={handleBookmarkUndo}
+        ref={toastRef}
+        timeout={3000}
+      />
     </React.Fragment>
   );
 };
