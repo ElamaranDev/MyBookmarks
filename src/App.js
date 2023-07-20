@@ -4,8 +4,6 @@ import Main from "./components/Main";
 import Popup from "./components/Popup";
 import Toast from "./components/Toast";
 
-// this is normal
-
 const App = () => {
   const data = JSON.parse(localStorage.getItem("bookmarks"));
   const [bookmarks, setBookmarks] = useState(Array.isArray(data) ? data : []);
@@ -14,6 +12,7 @@ const App = () => {
   const [inputValue, setInputValue] = useState("");
   const [filteredBookmarks, setFilteredBookmarks] = useState([]);
   const [sortOrder, setSortOrder] = useState("unsorted");
+  const [deletedBookmarks, setDeletedBookmarks] = useState([]);
 
   const getInputValue = (value) => {
     setInputValue(value);
@@ -40,9 +39,24 @@ const App = () => {
   };
 
   const handleBookmarkDelete = (id) => {
+    const deletedBookmarkItem = bookmarks.filter(
+      (bookmark) => bookmark.id === id
+    );
+    setDeletedBookmarks(deletedBookmarkItem);
     const newBookmarks = bookmarks.filter((bookmark) => bookmark.id !== id);
     setBookmarks(newBookmarks);
     localStorage.setItem("bookmarks", JSON.stringify(newBookmarks));
+  };
+
+  const handleBookmarkUndo = () => {
+    localStorage.setItem(
+      "bookmarks",
+      JSON.stringify([...bookmarks, ...deletedBookmarks])
+    );
+
+    setBookmarks((prevBookmarks) => [...prevBookmarks, ...deletedBookmarks]);
+
+    setDeletedBookmarks([]);
   };
 
   // sorting functionality
@@ -94,6 +108,7 @@ const App = () => {
         handleOptionsClose={handleOptionsClose}
         handleOptionsOpen={handleOptionsOpen}
         bookmarks={filteredBookmarks}
+        handleBookmarkUndo={handleBookmarkUndo}
       />
       <Popup
         isOpen={isOpen}

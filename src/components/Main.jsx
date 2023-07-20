@@ -11,6 +11,7 @@ const Main = ({
   handleOptionsOpen,
   handleBookmarkDelete,
   bookmarks,
+  handleBookmarkUndo,
 }) => {
   const containerRef = useRef(null);
   const noBookmarks = useRef(null);
@@ -111,6 +112,7 @@ const Main = ({
                         onClick={() => {
                           handleBookmarkDelete(id);
                           handleToastMessage(`"${name}" deleted!`);
+                          handleOptionsClose();
                         }}
                         href="#"
                       >
