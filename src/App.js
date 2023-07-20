@@ -10,12 +10,7 @@ const App = () => {
   const data = JSON.parse(localStorage.getItem("bookmarks"));
   const [bookmarks, setBookmarks] = useState(Array.isArray(data) ? data : []);
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("");
   const [isOptions, setIsOptions] = useState(false);
-
-  const handleInputSearch = (inputValue) => {
-    setInput(inputValue);
-  };
 
   const handleOptionsOpen = (id) => {
     setIsOptions(true);
@@ -51,17 +46,9 @@ const App = () => {
     toastRef.current.showToast(msg);
   };
 
-  const filteredBookmarks = useMemo(() => {
-    return bookmarks.filter((bookmark) => {
-      return bookmark.name.toLowerCase().includes(input.toLowerCase());
-    });
-  }, [bookmarks, input]);
-
   return (
     <React.Fragment>
       <Header
-        handleInputSearch={handleInputSearch}
-        inputText={input}
         handleClearBookmarks={handleClearBookmarks}
         handleAddBookmarks={handleAddBookmarks}
       />
@@ -71,7 +58,7 @@ const App = () => {
         isOptions={isOptions}
         handleOptionsClose={handleOptionsClose}
         handleOptionsOpen={handleOptionsOpen}
-        bookmarks={filteredBookmarks}
+        bookmarks={bookmarks}
       />
       <Popup
         isOpen={isOpen}
