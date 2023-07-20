@@ -7,6 +7,7 @@ const Header = ({
   getInputValue,
   handleClearBookmarks,
   handleAddBookmarks,
+  handleBookmarkSort,
 }) => {
   const optionsRef = useRef(null);
   const [isOptions, setIsOptions] = useState(false);
@@ -72,6 +73,7 @@ const Header = ({
             <li className="list-item">
               <a
                 onClick={() => {
+                  handleBookmarkSort();
                   handleOptionsClose();
                 }}
                 href="#"

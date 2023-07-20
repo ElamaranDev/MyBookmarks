@@ -13,6 +13,7 @@ const App = () => {
   const [isOptions, setIsOptions] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [filteredBookmarks, setFilteredBookmarks] = useState([]);
+  const [sortOrder, setSortOrder] = useState("unsorted");
 
   const getInputValue = (value) => {
     setInputValue(value);
@@ -44,6 +45,20 @@ const App = () => {
     localStorage.setItem("bookmarks", JSON.stringify(newBookmarks));
   };
 
+  // sorting functionality
+
+  const handleBookmarkSort = () => {
+    if (sortOrder === "unsorted") {
+      setBookmarks((prevBookmarks) =>
+        [...prevBookmarks].sort((a, b) => a.name.localeCompare(b.name))
+      );
+      setSortOrder("ascending");
+    } else {
+      setBookmarks(Array.isArray(data) ? data : []);
+      setSortOrder("unsorted");
+    }
+  };
+
   // toast message function
 
   const toastRef = useRef();
@@ -70,6 +85,7 @@ const App = () => {
         getInputValue={getInputValue}
         handleClearBookmarks={handleClearBookmarks}
         handleAddBookmarks={handleAddBookmarks}
+        handleBookmarkSort={handleBookmarkSort}
       />
       <Main
         handleToastMessage={handleToastMessage}
