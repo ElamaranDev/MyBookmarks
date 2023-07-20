@@ -3,9 +3,14 @@ import React, { useEffect, useRef, useState } from "react";
 import searchIcon from "../assets/search-icon.png";
 import optionsIcon from "../assets/options-icon-black.png";
 
-const Header = ({ handleClearBookmarks, handleAddBookmarks }) => {
+const Header = ({
+  getInputValue,
+  handleClearBookmarks,
+  handleAddBookmarks,
+}) => {
   const optionsRef = useRef(null);
   const [isOptions, setIsOptions] = useState(false);
+  const [query, setQuery] = useState("");
   const handleOptionsOpen = () => {
     setIsOptions(true);
   };
@@ -43,6 +48,11 @@ const Header = ({ handleClearBookmarks, handleAddBookmarks }) => {
             <img src={searchIcon} alt="search icon" />
             <input
               type="text"
+              value={query}
+              onChange={(e) => {
+                getInputValue(e.target.value);
+                setQuery(e.target.value);
+              }}
               className="search-input"
               placeholder="Search Bookmarks"
             />

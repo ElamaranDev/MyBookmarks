@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Popup from "./components/Popup";
@@ -11,6 +11,12 @@ const App = () => {
   const [bookmarks, setBookmarks] = useState(Array.isArray(data) ? data : []);
   const [isOpen, setIsOpen] = useState(false);
   const [isOptions, setIsOptions] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [filteredBookmarks, setFilteredBookmarks] = useState([]);
+
+  const getInputValue = (value) => {
+    setInputValue(value);
+  };
 
   const handleOptionsOpen = (id) => {
     setIsOptions(true);
@@ -46,9 +52,22 @@ const App = () => {
     toastRef.current.showToast(msg);
   };
 
+  // search functionality
+
+  useEffect(() => {
+    const filterBookmarks = () => {
+      const filteredItems = bookmarks.filter((bookmark) =>
+        bookmark.name.toLowerCase().includes(inputValue.toLowerCase())
+      );
+      setFilteredBookmarks(filteredItems);
+    };
+    filterBookmarks();
+  }, [inputValue, bookmarks]);
+
   return (
     <React.Fragment>
       <Header
+        getInputValue={getInputValue}
         handleClearBookmarks={handleClearBookmarks}
         handleAddBookmarks={handleAddBookmarks}
       />
@@ -58,7 +77,7 @@ const App = () => {
         isOptions={isOptions}
         handleOptionsClose={handleOptionsClose}
         handleOptionsOpen={handleOptionsOpen}
-        bookmarks={bookmarks}
+        bookmarks={filteredBookmarks}
       />
       <Popup
         isOpen={isOpen}
