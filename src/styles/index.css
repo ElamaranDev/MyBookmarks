@@ -83,14 +83,32 @@ nav {
   flex: 1;
   outline: none;
 }
-.nav-options {
+
+/* nav options */
+
+.options-container {
+  display: flex;
+  align-items: center;
   width: 200px;
   display: flex;
   justify-content: flex-end;
 }
+
+/* new nav options */
+.nav-options {
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgb(255, 255, 255);
+  padding: 6px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 .nav-options img {
   height: 18px;
-  cursor: pointer;
+}
+
+.nav-options:hover {
+  background-color: var(--search-bar);
 }
 
 /* main component */
@@ -400,7 +418,7 @@ bookmark {
     width: 100px;
     margin-right: 40px;
   }
-  .nav-options {
+  .options-container {
     width: 100px;
     margin-left: 40px;
   }
@@ -441,7 +459,7 @@ bookmark {
   .nav-header {
     width: unset;
   }
-  .nav-options {
+  .options-container {
     width: unset;
   }
   .popup-container {

@@ -59,6 +59,7 @@ const App = () => {
         lastDeletedBookmark
       );
       setBookmarks(combinedBookmarks);
+      localStorage.setItem("bookmarks", JSON.stringify(combinedBookmarks));
       setLastDeletedBookmark(null); // Reset the lastDeletedBookmark state after undo
     }
   };

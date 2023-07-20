@@ -59,12 +59,10 @@ const Header = ({
             />
           </div>
         </div>
-        <div className="nav-options">
-          <img
-            onClick={handleOptionsOpen}
-            src={optionsIcon}
-            alt="options icon"
-          />
+        <div className="options-container">
+          <div onClick={handleOptionsOpen} className="nav-options">
+            <img src={optionsIcon} alt="options icon" />
+          </div>
         </div>
       </nav>
       {isOptions ? (
