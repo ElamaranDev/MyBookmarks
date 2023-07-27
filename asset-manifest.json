@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/MyBookmarks/static/css/main.b6b6a191.css",
-    "main.js": "/MyBookmarks/static/js/main.86270464.js",
+    "main.js": "/MyBookmarks/static/js/main.6b0f898c.js",
     "static/media/search-icon.png": "/MyBookmarks/static/media/search-icon.1b63d5a1ddfe853bb4b3.png",
     "static/media/favicon-alt.png": "/MyBookmarks/static/media/favicon-alt.c36713f9c0ad3bdfaff8.png",
     "static/media/visit-blue.png": "/MyBookmarks/static/media/visit-blue.b357fc6727c65568fd3c.png",
     "index.html": "/MyBookmarks/index.html",
     "main.b6b6a191.css.map": "/MyBookmarks/static/css/main.b6b6a191.css.map",
-    "main.86270464.js.map": "/MyBookmarks/static/js/main.86270464.js.map"
+    "main.6b0f898c.js.map": "/MyBookmarks/static/js/main.6b0f898c.js.map"
   },
   "entrypoints": [
     "static/css/main.b6b6a191.css",
-    "static/js/main.86270464.js"
+    "static/js/main.6b0f898c.js"
   ]
 }
