@@ -11,6 +11,7 @@ const Main = ({
   handleOptionsOpen,
   handleBookmarkDelete,
   bookmarks,
+  handleAddBookmarks,
 }) => {
   const containerRef = useRef(null);
   const noBookmarks = useRef(null);
@@ -95,7 +96,10 @@ const Main = ({
                       <a
                         onClick={() => {
                           handleCopy(url);
-                          handleToastMessage(`"${name}" Copied to Clip board!`, false);
+                          handleToastMessage(
+                            `"${name}" Copied to Clip board!`,
+                            false
+                          );
                           handleOptionsClose();
                         }}
                         href="#"
@@ -104,7 +108,15 @@ const Main = ({
                       </a>
                     </li>
                     <li className="list-item">
-                      <a href="#">Edit</a>
+                      <a
+                        onClick={() => {
+                          handleAddBookmarks(bookmark);
+                          handleOptionsClose();
+                        }}
+                        href="#"
+                      >
+                        Edit
+                      </a>
                     </li>
                     <li className="list-item">
                       <a

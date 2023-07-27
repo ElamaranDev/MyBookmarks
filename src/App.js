@@ -13,6 +13,8 @@ const App = () => {
   const [filteredBookmarks, setFilteredBookmarks] = useState([]);
   const [sortOrder, setSortOrder] = useState("unsorted");
   const [lastDeletedBookmark, setLastDeletedBookmark] = useState(null);
+  const [BookmarkToEdit, setBookmarkToEdit] = useState("");
+
   const getInputValue = (value) => {
     setInputValue(value);
   };
@@ -28,9 +30,15 @@ const App = () => {
   const onClose = () => {
     setIsOpen(false);
   };
-  const handleAddBookmarks = () => {
+  const handleAddBookmarks = (bookmark) => {
     setIsOpen(true);
+    setBookmarkToEdit(bookmark);
   };
+
+  console.log(
+    "this is from main and the bookmark value is " + BookmarkToEdit.name,
+    BookmarkToEdit.url
+  );
 
   const handleClearBookmarks = () => {
     localStorage.setItem("bookmarks", JSON.stringify([]));
@@ -113,12 +121,14 @@ const App = () => {
         handleOptionsClose={handleOptionsClose}
         handleOptionsOpen={handleOptionsOpen}
         bookmarks={filteredBookmarks}
+        handleAddBookmarks={handleAddBookmarks}
       />
       <Popup
         isOpen={isOpen}
         onClose={onClose}
         bookmarks={bookmarks}
         setBookmarks={setBookmarks}
+        bookmarkToEdit={BookmarkToEdit}
       />
       <Toast
         handleBookmarkUndo={handleBookmarkUndo}

@@ -83,7 +83,7 @@ const Header = ({
               <a
                 href="#"
                 onClick={() => {
-                  handleAddBookmarks();
+                  handleAddBookmarks("");
                   handleOptionsClose();
                 }}
               >
