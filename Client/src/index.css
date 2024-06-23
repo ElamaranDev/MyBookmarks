@@ -108,7 +108,7 @@ h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 10px 20px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -530,46 +530,6 @@ h6 {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .bookmark-functions {
-    align-items: end;
-    padding: 5px;
-    gap: 8px;
-    min-width: 420px;
-  }
-
-  .bookmark-functions .filter-bookmarks {
-    flex-direction: column;
-    align-items: start;
-  }
-
-  .bookmark-functions .sort-bookmarks {
-    flex-direction: column;
-    align-items: start;
-  }
-
-  #dropdown-options {
-    min-width: 120px;
-    padding: 11px 6px;
-    margin: 0;
-    text-indent: 2px;
-    font-size: var(--font-small);
-  }
-
-  #sort-options {
-    min-width: 100px;
-    padding: 11px 8px;
-    font-size: var(--font-small);
-    margin: 0;
-  }
-
-  #create-bookmark-btn {
-    font-weight: normal;
-    padding: 9px 10px;
-  }
-
-}
-
 /* bookmark functions :end */
 
 bookmark {
@@ -581,7 +541,7 @@ bookmark {
   max-width: 700px;
   width: 100%;
   flex: 1;
-  padding: 10px 10px;
+  padding: 15px 15px;
   border-radius: 10px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   transition: var(--bookmark-clicked-transition);
@@ -595,7 +555,7 @@ bookmark {
 }
 
 .bookmark-item {
-  height: 80px;
+  height: 100px;
   transition: var(--bookmark-clicked-transition);
   overflow: hidden;
   cursor: pointer;
@@ -619,7 +579,7 @@ bookmark {
 }
 
 .bookmark-item-clicked {
-  height: 40px;
+  height: 50px;
   transition: var(--bookmark-clicked-transition);
 }
 
@@ -627,7 +587,7 @@ bookmark {
   /* background-color: rgb(105, 105, 184); */
   display: flex;
   align-items: center;
-  height: 40px;
+  height: 50px;
   overflow: hidden;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -648,7 +608,7 @@ bookmark {
 
 .bookmark-clicked {
   display: flex;
-  height: 40px;
+  height: 50px;
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
@@ -662,6 +622,7 @@ bookmark {
   color: var(--logo);
   width: auto;
   margin-left: 5px;
+  font-size: var(--font-normal);
 }
 
 .bookmark-clicked .visit-btn {
@@ -675,9 +636,8 @@ bookmark {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 5px;
-  height: 30px;
-  width: 70px;
+  margin-right: 10px;
+  padding: 4px 18px;
   border-radius: 5px;
 }
 
@@ -1068,4 +1028,67 @@ bookmark {
     border-radius: 6px !important;
     /* Default border-radius */
   }
+
+
+  .bookmark-item {
+    height: 80px;
+  }
+
+  .bookmark-item-clicked,
+  .bookmark,
+  .bookmark-clicked {
+    height: 40px;
+  }
+
+  .bookmark-clicked .visit-btn a {
+    margin-right: 8px;
+    padding: 2px 16px;
+    border-radius: 5px;
+  }
+
+  .bookmarks-container {
+    padding: 10px 10px;
+  }
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .bookmark-functions {
+    align-items: end;
+    padding: 5px;
+    gap: 5px;
+    min-width: 420px;
+  }
+
+  .bookmark-functions .filter-bookmarks {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .bookmark-functions .sort-bookmarks {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  #dropdown-options {
+    min-width: 120px;
+    padding: 11px 6px;
+    margin: 0;
+    text-indent: 2px;
+    font-size: var(--font-normal);
+  }
+
+  #sort-options {
+    min-width: 120px;
+    padding: 11px 8px;
+    font-size: var(--font-normal);
+    margin: 0;
+  }
+
+  #create-bookmark-btn {
+    font-weight: normal;
+    padding: 9px 10px;
+  }
+
 }

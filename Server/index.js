@@ -5,6 +5,7 @@ import bookmarkRoutes from "./routes/bookmarkRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 dotenv.config();
 const port = process.env.PORT || 8000;
