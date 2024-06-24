@@ -967,10 +967,9 @@ bookmark {
     padding: 10px 10px;
   }
 
-
-
 }
 
+/* Sign In and Sign Up */
 
 
 
@@ -1064,6 +1063,22 @@ bookmark {
   .Toastify__toast {
     margin-bottom: 1rem !important;
     border-radius: 6px !important;
+  }
+
+  .header-nav-link {
+    padding: 5px 8px !important;
+    margin: 0 !important;
+  }
+
+
+  .sign-in-link,
+  .sign-out-link {
+    padding: 0px !important;
+  }
+
+  .sign-in-link a,
+  .sign-out-link a {
+    padding: 0 !important;
   }
 
 
@@ -1209,5 +1224,16 @@ bookmark {
     padding: 8px 6px;
     max-width: 145px;
   }
+
+  .form-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  .custom-form-container {
+    padding: 20px !important;
+  }
+
 
 }

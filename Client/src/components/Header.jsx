@@ -74,12 +74,12 @@ const Header = () => {
               </>
             ) : (
               <>
-                <NavLink to={"/login"}>
+                <NavLink className="header-nav-link" to={"/login"}>
                   <li className="sign-in-link">
                     <a id="sign-in-btn">Sign In</a>
                   </li>
                 </NavLink>
-                <NavLink to={"/register"}>
+                <NavLink className="header-nav-link" to={"/register"}>
                   <li className="sign-out-link">
                     <a id="sign-up-btn">Sign Up</a>
                   </li>
