@@ -159,19 +159,21 @@ const PopUp = ({
         <div className="category">
           {isCategory ? (
             <div className="choose-category">
-              <Dropdown
-                name="Category"
-                categories={categories}
-                onSelectedValueChange={handleCategorySelection}
-                selectedValue={selectedCategory}
-                editCategory={editBookmark?.category}
-              />
+              <div className="choose-dropdown">
+                <Dropdown
+                  name="Category"
+                  categories={categories}
+                  onSelectedValueChange={handleCategorySelection}
+                  selectedValue={selectedCategory}
+                  editCategory={editBookmark?.category}
+                />
+              </div>
               <button
                 type="button"
                 onClick={() => setIsCategory(!isCategory)}
                 id="create-category-btn"
               >
-                Create Category
+                New Category
               </button>
             </div>
           ) : (
