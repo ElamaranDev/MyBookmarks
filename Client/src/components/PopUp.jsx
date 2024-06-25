@@ -7,6 +7,7 @@ import {
   useUpdateBookmarkMutation,
 } from "../slices/bookmarkApiSlice";
 import { toast } from "react-toastify";
+import faviconAlt from "../assets/favicon-alt.png";
 
 const PopUp = ({
   isOpen,
@@ -56,6 +57,20 @@ const PopUp = ({
     return null;
   };
 
+  const validateFaviconURL = async (faviconURL) => {
+    try {
+      const response = await fetch(faviconURL, { method: "HEAD" });
+      if (response.ok) {
+        return faviconURL;
+      } else {
+        return faviconAlt;
+      }
+    } catch (error) {
+      console.error("Error validating favicon URL:", error);
+      return faviconAlt;
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const bookmarkName = nameRef.current.value;
@@ -77,40 +92,39 @@ const PopUp = ({
     const size = 32;
     const faviconURL = `https://www.google.com/s2/favicons?domain=${domain}&sz=${size}`;
 
+    // Validate the favicon URL
+    const validFaviconURL = await validateFaviconURL(faviconURL);
+
     try {
       if (editBookmark && editBookmark._id) {
-        try {
-          const updatedBookmark = {
-            ...editBookmark,
-            bookmarkName,
-            bookmarkURL,
-            category,
-            faviconURL,
-          };
+        const updatedBookmark = {
+          ...editBookmark,
+          bookmarkName,
+          bookmarkURL,
+          category,
+          faviconURL: validFaviconURL,
+        };
 
-          setUpdatedBookmark(updatedBookmark);
-          toast.success("Updated Successfully!");
-          closePopUp();
-          await updateBookmark({
-            id: editBookmark._id,
-            updatedBookmark: updatedBookmark,
-          }).unwrap();
-        } catch (error) {
-          toast.error("Error Updating Bookmark!");
-          console.log("Error Updating: " + error);
-        }
+        setUpdatedBookmark(updatedBookmark);
+        toast.success("Updated Successfully!");
+        closePopUp();
+        await updateBookmark({
+          id: editBookmark._id,
+          updatedBookmark: updatedBookmark,
+        }).unwrap();
       } else {
         const newBookmark = {
           bookmarkName,
           bookmarkURL,
           category,
-          faviconURL,
+          faviconURL: validFaviconURL,
         };
         setNewBookmark(newBookmark);
         closePopUp();
         await addBookmark(newBookmark).unwrap();
       }
     } catch (error) {
+      toast.error("Error Saving Bookmark!");
       console.error("Failed to save bookmark:", error);
     }
   };

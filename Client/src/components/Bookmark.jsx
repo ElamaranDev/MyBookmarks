@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-import faviconAlt from "../assets/favicon-alt.png";
+import faviconAlt from "../assets/favicon.png";
 import visitIcon from "../assets/visit-blue.png";
 import OptionsBtn from "../assets/options-icon-grey.png";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 const Bookmark = ({
   bookmark,
@@ -17,12 +18,18 @@ const Bookmark = ({
 }) => {
   const { bookmarkName, bookmarkURL, faviconURL, _id } = bookmark;
 
+  const [faviconSrc, setFaviconSrc] = useState(faviconURL);
+
   const handleCopy = (url) => {
     navigator.clipboard
       .writeText(url)
       .catch((error) => console.error("Unable to copy URL: ", error));
     closeOption();
     toast.success(`${url} Copied!`);
+  };
+
+  const handleFaviconError = () => {
+    setFaviconSrc(faviconAlt);
   };
 
   return (
@@ -65,7 +72,12 @@ const Bookmark = ({
           className="bookmark"
           onClick={(event) => handleBookmarkOpen(_id, event)}
         >
-          <img id="favicon" src={faviconURL || faviconAlt} alt="favicon" />
+          <img
+            id="favicon"
+            src={faviconSrc}
+            onError={handleFaviconError}
+            alt="favicon"
+          />
           <div className="bookmark-name">{bookmarkName}</div>
           <div
             className="options-btn"
