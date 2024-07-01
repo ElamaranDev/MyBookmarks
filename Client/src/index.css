@@ -552,7 +552,7 @@ bookmark {
 }
 
 .bookmark-item {
-  height: 100px;
+  height: 90px;
   transition: var(--bookmark-clicked-transition);
   overflow: hidden;
   cursor: pointer;
@@ -605,8 +605,8 @@ bookmark {
 
 .bookmark-clicked {
   display: flex;
-  height: 50px;
-  align-items: center;
+  height: 35px;
+  align-items: start;
   justify-content: space-between;
   overflow: hidden;
   margin-left: 5px;
@@ -620,12 +620,17 @@ bookmark {
   width: auto;
   margin-left: 5px;
   font-size: var(--font-normal);
+  flex: 1;
+  cursor: default;
 }
 
 .bookmark-clicked .visit-btn {
   display: flex;
   align-items: center;
+  justify-content: end;
   color: var(--logo);
+  width: 120px;
+  margin-right: 5px;
 }
 
 .bookmark-clicked .visit-btn a {
@@ -633,14 +638,12 @@ bookmark {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
-  padding: 4px 18px;
-  border-radius: 5px;
+  margin-right: 12px;
+  cursor: pointer;
 }
 
 .bookmark-clicked .visit-btn a:hover {
-  background-color: rgb(255, 255, 255);
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0.6;
 }
 
 .bookmark-clicked .visit-btn a:active {
@@ -1083,20 +1086,23 @@ bookmark {
 
 
   .bookmark-item {
-    height: 80px;
+    height: 85px;
   }
 
   .bookmark-item-clicked,
-  .bookmark,
-  .bookmark-clicked {
-    height: 40px;
+  .bookmark {
+    height: 50px;
   }
 
-  .bookmark-clicked .visit-btn a {
+  .bookmark-clicked {
+    height: 35px;
+  }
+
+  /* .bookmark-clicked .visit-btn a {
     margin-right: 8px;
     padding: 2px 16px;
     border-radius: 5px;
-  }
+  } */
 
   .bookmarks-container {
     padding: 10px 10px;
