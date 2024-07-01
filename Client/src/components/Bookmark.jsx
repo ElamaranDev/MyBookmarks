@@ -3,7 +3,7 @@ import faviconAlt from "../assets/favicon.png";
 import visitIcon from "../assets/visit-blue.png";
 import OptionsBtn from "../assets/options-icon-grey.png";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Bookmark = ({
   bookmark,
@@ -19,6 +19,10 @@ const Bookmark = ({
   const { bookmarkName, bookmarkURL, faviconURL, _id } = bookmark;
 
   const [faviconSrc, setFaviconSrc] = useState(faviconURL);
+
+  useEffect(() => {
+    setFaviconSrc(faviconURL);
+  }, [faviconURL]);
 
   const handleCopy = (url) => {
     navigator.clipboard

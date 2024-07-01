@@ -57,11 +57,12 @@ const PopUp = ({
     return null;
   };
 
-  const validateFaviconURL = async (faviconURL) => {
+  const validateFaviconURL = async (domain) => {
+    const clearbitLogoURL = `https://logo.clearbit.com/${domain}`;
     try {
-      const response = await fetch(faviconURL, { method: "HEAD" });
+      const response = await fetch(clearbitLogoURL, { method: "HEAD" });
       if (response.ok) {
-        return faviconURL;
+        return clearbitLogoURL;
       } else {
         return faviconAlt;
       }
@@ -89,11 +90,7 @@ const PopUp = ({
     }
 
     const domain = extractDomainFromUrl(bookmarkURL);
-    const size = 32;
-    const faviconURL = `https://www.google.com/s2/favicons?domain=${domain}&sz=${size}`;
-
-    // Validate the favicon URL
-    const validFaviconURL = await validateFaviconURL(faviconURL);
+    const validFaviconURL = await validateFaviconURL(domain);
 
     try {
       if (editBookmark && editBookmark._id) {

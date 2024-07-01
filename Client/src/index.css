@@ -592,9 +592,9 @@ bookmark {
 }
 
 #favicon {
-  height: 20px;
-  margin-right: 5px;
+  height: 24px;
   margin-left: 5px;
+  background-color: transparent;
 }
 
 .bookmark-name {
