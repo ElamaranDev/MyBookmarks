@@ -629,7 +629,7 @@ bookmark {
   align-items: center;
   justify-content: end;
   color: var(--logo);
-  width: 120px;
+  width: 100px;
   margin-right: 5px;
 }
 
@@ -1098,11 +1098,10 @@ bookmark {
     height: 35px;
   }
 
-  /* .bookmark-clicked .visit-btn a {
-    margin-right: 8px;
-    padding: 2px 16px;
-    border-radius: 5px;
-  } */
+  .bookmark-clicked .visit-btn {
+    width: 75px;
+  }
+
 
   .bookmarks-container {
     padding: 10px 10px;
